@@ -27,6 +27,7 @@ class MyHomePage extends StatefulWidget {
 
   final String title;
 
+
   @override
   _MyHomePageState createState() => _MyHomePageState();
 }
@@ -41,6 +42,8 @@ class _MyHomePageState extends State<MyHomePage> {
     });
   }
 
+  final myFocusNode = FocusNode();
+
   @override
   Widget build(BuildContext context) {
 
@@ -51,25 +54,30 @@ class _MyHomePageState extends State<MyHomePage> {
 
 
       ),
-      body: Center(
+      body: Container(
+        width: double.infinity,
         child: Column(
-
-
-
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget> [
-           Text("おだけんとです",
-           style: TextStyle(
-             fontSize: 20,
-             color: Colors.green,
-             fontWeight: FontWeight.bold,
-             fontStyle: FontStyle.italic,
-           )
-           ),
-            Text("肉まん"),
+          children: [
+            TextField(
+              autofocus: true,
+              decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: 'Enter a search term'
+              ),
+            ),
+            TextField(
+              focusNode: myFocusNode,
+            ),
+            OutlinedButton(
+                child: Text("フォーカス"),
+            onPressed: (){
+            // ここにフォーカス
+              myFocusNode.requestFocus();
+            },
+            ),
           ],
         ),
-      ),
+        ),
     );
   }
 }
